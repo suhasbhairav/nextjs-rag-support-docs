@@ -20,6 +20,12 @@ Built by **[Suhas Bhairav](https://suhasbhairav.com)** as part of the **[AI Temp
 | This Template Page | [https://suhasbhairav.com/ai-templates/nextjs-rag-support-docs](https://suhasbhairav.com/ai-templates/nextjs-rag-support-docs) |
 | Creator | [https://suhasbhairav.com](https://suhasbhairav.com) |
 
+## One-Click Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsuhasbhairav%2Fnextjs-rag-support-docs&env=OPENAI_API_KEY%2COPENAI_MODEL&envDescription=Add+the+server-side+API+keys+required+by+this+template.+These+values+are+stored+as+deployment+environment+variables+and+are+not+committed+to+the+repository.&envLink=https%3A%2F%2Fgithub.com%2Fsuhasbhairav%2Fnextjs-rag-support-docs%23environment-variables)
+
+Use the button above to clone and deploy this template directly from GitHub. The deploy flow will ask for `OPENAI_API_KEY`, `OPENAI_MODEL` as production environment variables before the app goes live.
+
 ## Executive Overview
 
 Next.js RAG Support Docs is designed for builders who need more than a static UI kit. It provides a concrete application pattern with a Next.js frontend, server-side API route, environment-driven provider configuration, and a responsive interface that can be adapted into a SaaS product, internal workflow, customer-facing assistant, or AI operations tool.
