@@ -1,3 +1,4 @@
+import { validateUploadInput } from "@/lib/production-guardrails";
 import { createRequire } from "node:module";
 import { addDocument } from "@/lib/rag-store";
 
@@ -23,9 +24,14 @@ export async function POST(request) {
   const pastedText = formData.get("text");
   const title = formData.get("title");
 
-  let content = typeof pastedText === "string" ? pastedText : "";
+  const uploadGuardrail = validateUploadInput({ file, text: pastedText, title });
+  if (!uploadGuardrail.ok) {
+    return Response.json({ error: uploadGuardrail.error }, { status: uploadGuardrail.status });
+  }
+
+  let content = uploadGuardrail.text;
   let sourceType = "paste";
-  let documentTitle = typeof title === "string" ? title : "";
+  let documentTitle = uploadGuardrail.title;
 
   if (file && typeof file.arrayBuffer === "function") {
     content = await extractFileText(file);

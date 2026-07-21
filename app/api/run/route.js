@@ -1,3 +1,4 @@
+import { parseJsonRequest, validateRequestBody, toSafeError } from "@/lib/production-guardrails";
 import OpenAI from "openai";
 
 export const runtime = "nodejs";
@@ -39,7 +40,12 @@ Structured output:
 }
 
 export async function POST(request) {
-  const body = await request.json().catch(() => ({}));
+  const body = await parseJsonRequest(request);
+  const guardrail = validateRequestBody(body);
+  if (!guardrail.ok) {
+    return Response.json({ error: guardrail.error }, { status: guardrail.status });
+  }
+
   const prompt = typeof body.prompt === "string" ? body.prompt.trim() : "";
 
   if (!prompt) {
@@ -71,7 +77,7 @@ export async function POST(request) {
     });
   } catch (error) {
     return Response.json(
-      { error: error.message || "OpenAI request failed." },
+      { error: toSafeError(error, "OpenAI request failed.") },
       { status: 500 },
     );
   }
